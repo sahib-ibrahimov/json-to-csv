@@ -1,3 +1,13 @@
+const $ = e => document.querySelector(e);
+
+function FormToJSON(form) {
+  form = new FormData(form);
+  const data = {};
+  const keys = form.keys();
+  for(const key of keys) data[key] = form.get(key);
+  return data;
+}
+
 const data = new Array();
 const div = $('.data');
 
@@ -28,7 +38,7 @@ function downloadAsFile(data, fileName = '') {
   let a = document.createElement("a");
   let file = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
   a.href = URL.createObjectURL(file);
-  a.download = fileName;
+  a.download = fileName + '.csv';
   a.click();
 }
 
